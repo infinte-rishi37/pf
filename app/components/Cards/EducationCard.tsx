@@ -1,5 +1,5 @@
-import SchoolTwoToneIcon from '@mui/icons-material/SchoolTwoTone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import SchoolTwoToneIcon from '@mui/icons-material/SchoolTwoTone'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 
 const EducationCard = ({details}:{details : any}) => {
   return (
