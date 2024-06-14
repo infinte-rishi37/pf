@@ -38,10 +38,10 @@ const CPCard = () => {
                 </div>
                 <div >
                     {
-                        Object.keys(info).map((key) => {
+                        Object.keys(info).map((key, items) => {
                             return (
                                 <div key={key}>
-                                    {key} : {info[key]}
+                                    {key} : {items}
                                 </div>
                             )
                         })
