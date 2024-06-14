@@ -20,7 +20,7 @@ const EducationCard = ({details}:{details : any}) => {
         {details.Courses.map(({item, index}:{item:string, index:any}) => {
           return (
             <div key = {index} className='p-3 m-3 bg-pall-dl rounded-md'>
-              <p>{item}</p>
+              <p>{index}</p>
             </div>
           )
         })}
