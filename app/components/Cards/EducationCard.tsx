@@ -1,5 +1,6 @@
 import SchoolTwoToneIcon from '@mui/icons-material/SchoolTwoTone'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
+import { Key } from 'react'
 
 const EducationCard = ({details}:{details : any}) => {
   return (
@@ -17,10 +18,10 @@ const EducationCard = ({details}:{details : any}) => {
         </div>
       </div>
       <div className='flex justify-between mt-3 flex-wrap object-center'>
-        {details.Courses.map(({item, index}:{item:string, index:any}) => {
+        {details.Courses.map((key: any, index: Key | null | undefined) => {
           return (
-            <div key = {index} className='p-3 m-3 bg-pall-dl rounded-md'>
-              <p>{index}</p>
+            <div key = {key} className='p-3 m-3 bg-pall-dl rounded-md'>
+              <p>{details.Courses[index as any]}</p>
             </div>
           )
         })}

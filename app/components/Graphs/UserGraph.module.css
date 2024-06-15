@@ -1,0 +1,26 @@
+.graphContainer {
+    background-image: linear-gradient(rgb(139, 60, 139) 8%,rgb(66, 66, 255) 5%,rgb(66, 66, 255) 23%,rgb(94, 255, 255) 23%,rgb(94, 248, 248) 31.5%,rgb(52, 121, 52) 31.5%,rgb(52, 121, 52) 40%, rgb(164, 164, 164) 36%); 
+    border: 1px solid #d1d5db; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the container */
+    max-width: 800px; /* Maximum width of the graph container */
+    margin: 0 auto; /* Center the container */
+    opacity: 80%;
+  }
+  
+  .chartWrapper {
+    position: relative;
+    height: 400px; /* Adjust the height as needed */
+    width: 100%; /* Full width of the container */
+  }
+  
+  @media (max-width: 600px) {
+    .graphContainer {
+      padding: 10px; /* Reduce padding on smaller screens */
+    }
+  
+    .chartWrapper {
+      height: 300px; /* Adjust height for smaller screens */
+    }
+  }
+  
