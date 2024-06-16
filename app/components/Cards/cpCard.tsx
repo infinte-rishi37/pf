@@ -1,9 +1,10 @@
 
-import {getRating, getInfo} from "../../services/functions/codeforcesAPI";
+import {getRating, getInfo, connectServer} from "../../services/functions/codeforcesAPI";
 import { useState, useEffect } from 'react';
 import UserGraph from "../Graphs/userGraph";
 import Image from "next/image";
 import { Button, TextField } from "@mui/material";
+import { Console } from "console";
 
 interface Info {
     rank: string;
@@ -14,7 +15,7 @@ interface Info {
     titlePhoto: string;
 }
 
-const CPCard = () => {
+const CPCard = ({theme}: {theme: string}) => {
     const [username, setUsername] = useState('Rishi_Kumar_Singh');
     const [info, setInfo] = useState({
         rank: '...',
@@ -37,7 +38,25 @@ const CPCard = () => {
           .then((result) => setInfo(result as Info))
           .catch((error) => console.error("Error fetching data:", error));
     }, []);
-    console.log(info);
+
+    const load = () => {
+        const name = 'Rishi_Kumar_Singh';
+        connectServer(username)
+        .then((x) => {
+          getRating(username)
+          .then((result) => setHandle(result))
+          .catch((error) => console.error("Error fetching data:", error));
+          getInfo(username)
+          .then((result) => setInfo(result as Info))
+          .catch((error) => console.error("Error fetching data:", error));
+        })
+        .catch((x) => {
+          alert("UserName Not Found!")
+          setUsername(name);
+        })
+    }
+
+    // console.log(info);
 
     const getColor = (rating: number) => {
         if (rating >= 3000) {
@@ -80,20 +99,13 @@ const CPCard = () => {
                     />
                     <Button 
                         variant="contained"
-                        onClick={() => {
-                            getRating(username)
-                            .then((result) => setHandle(result))
-                            .catch((error) => console.error("Error fetching data:", error));
-                            getInfo(username)
-                            .then((result) => setInfo(result as Info))
-                            .catch((error) => console.error("Error fetching data:", error));
-                    }}>Check Your</Button>
+                        onClick={() => load()}
+                    >
+                        Check Your
+                    </Button>
                 </div>
             </h1>
             <div>
-                <div className="text-text">
-                    {/* User data */}
-                </div>  
                 <div className="flex justify-between">
                     <div>
                         <div style={{ color: getColor(info.rating) }}>
@@ -107,16 +119,10 @@ const CPCard = () => {
                     <img
                         src={info.titlePhoto}
                         alt="Profile"
-                        height={400}
-                        className="rounded-full"
+                        className="rounded h-32"
                     />
                 </div>
-
-                <div className="text-text">
-                    {/* User Contests */}
-                </div>
-                {/* {console.log(handle)} */}
-                <UserGraph data={handle}></UserGraph>
+                <UserGraph data={handle} theme={theme}></UserGraph>
             </div>
         </main>
     );

@@ -1,6 +1,32 @@
 import { apiConnector } from "../apiConnector";
 import { cfEndpoints } from "../api";
 
+export const connectServer = async (handle: string) => {
+    const url = cfEndpoints.GET_RATING + handle;
+    let result = null;
+    try{
+        const response = await apiConnector("GET", url, null, null, null);
+        if(!response.data.result) {
+            result = 'Failure'
+            console.log(response.data.result)
+        }
+        else{
+            result = 'Success'
+        }
+    }
+    catch{
+        result = 'Failure'
+    }
+    return new Promise((resolve, reject) => {
+        if(result === 'Success'){
+            resolve('Success')
+        }
+        else{
+            reject('Failure')
+        }
+    })
+};
+
 export const getRating = async (handle: string) => {
     const url = cfEndpoints.GET_RATING + handle;
     let result = null;

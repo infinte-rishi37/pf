@@ -12,7 +12,7 @@ export default function About({theme}:{theme:string}) {
                 Competitive Programming
             </div>
             <div >
-                <CPCard/>
+                <CPCard theme={theme}/>
             </div>
         </div>
     </main>

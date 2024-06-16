@@ -12,7 +12,7 @@ export default function About({theme}:{theme:string}) {
             <p>Bachelor of Engineering in Information Technology</p>
         </div>
 
-        <p className="w-[50%] text-text">
+        <p className="w-[50%] text-text z-30">
         I&apos;m a second year IT undergraduate. 
         My interests lie in competitive programming and web development. I love to explore and expand my knowledge while learning about various algorithms and languages.
         I&apos;m a second year IT undergraduate. 
@@ -20,7 +20,9 @@ export default function About({theme}:{theme:string}) {
         My interests lie in competitive programming and web development. I love to explore and expand my knowledge while learning about various algorithms and languages.
         I&apos;m a second year IT undergraduate. 
         <br /> <br />
-        My interests lie in competitive programming and web development. I love to explore and expand my knowledge while learning about various algorithms and languages.
+        <b>
+          This website is currently beign developed. You can visit <a href="https://codeforces.com/profile/Rishi_Kumar_Singh" className="text-blue-500">https://codeforces.com/profile/Rishi_Kumar_Singh</a>
+        </b>
         </p>
     </main>
   );

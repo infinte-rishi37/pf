@@ -7,7 +7,7 @@ const EducationDetail = [
         Degree : "Bachelor of Engineering ( Information Technology )",
         startsFrom : "Oct 2022",
         endsOn : "July 2026",
-        Grade : "9.07 CGPA",
+        Grade : "9.27 CGPA",
         Courses :[
             "Data Structures and Algorithms",
             "Object-Oriented Programming",

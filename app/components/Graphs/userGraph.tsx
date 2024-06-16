@@ -12,7 +12,7 @@ import {
   Tooltip,
   Legend,
   ChartData,
-  ChartOptions
+  ChartOptions,
 } from 'chart.js';
 import styles from './UserGraph.module.css';
 
@@ -30,7 +30,7 @@ interface UserGraphProps {
 data: any;
 }
 
-const UserGraph: React.FC<UserGraphProps> = ({ data }) => {
+const UserGraph = ( {data, theme}:{data:any, theme:string}) => {
 
     const sortedData = Array.isArray(data) ? data.sort((a: any, b: any) => a.ratingUpdateTimeSeconds - b.ratingUpdateTimeSeconds) : null;
     
@@ -40,43 +40,50 @@ const UserGraph: React.FC<UserGraphProps> = ({ data }) => {
             FETCHING GRAPH API...
             </>
         )
-    }
-
-    console.log("sortedData", sortedData);
-    // const dummyRating = sortedData[0].newRating; 
+    } 
     const minRating = sortedData.reduce((min, contest) => contest.newRating < min ? contest.newRating : min, sortedData[0].newRating);
     const maxRating = sortedData.reduce((max, contest) => contest.newRating > max ? contest.newRating : max, sortedData[0].newRating);
-    // console.log("minData", minRating);
-    // console.log("maxData", maxRating);
+    
+    const getColor = (rating: number) => {
+      if (rating >= 3000) {
+        return '#a00';
+      } else if (rating >= 2600) {
+        return '#f33';
+      } else if (rating >= 2400) {
+        return '#f77';
+      } else if (rating >= 2300) {
+        return '#ffbb55';
+      } else if (rating >= 2100) {
+        return '#ffcc88';
+      } else if (rating >= 1900) {
+        return '#f8f';
+      } else if (rating >= 1600) {
+        return '#aaf';
+      } else if (rating >= 1400) {
+        return '#77ddbb';
+      } else if (rating >= 1200) {
+        return '#7f7';
+      } else {
+        return '#ccc';
+      }
+    };  
+
     const chartData: ChartData<'line'> = {
     labels: sortedData.map((contest) => new Date(contest.ratingUpdateTimeSeconds * 1000).toLocaleDateString()),
     datasets: [
       {
         data: sortedData.map((contest) => contest.newRating),
         fill: false,
-        borderColor: 'orange',
-        backgroundColor: 'orange',
-        pointBackgroundColor: '#fff',
-        pointBorderColor: 'orange',
-        pointHoverBackgroundColor: 'orange',
+        borderColor: `${theme === 'dark' ? 'white' : 'blue'}`,
+        backgroundColor: `${theme === 'dark' ? 'white' : 'blue'}`,
+        pointBackgroundColor: 'orange',
+        pointBorderColor: `${theme === 'dark' ? 'white' : 'blue'}`,
+        pointHoverBackgroundColor: `${theme === 'dark' ? 'white' : 'blue'}`,
         pointHoverBorderColor: 'orange',
         tension: 0.1
       }
     ]
   };
-
-  var markings = [
-    { color: '#a00', lineWidth: 1, yaxis: { from: 3000 } },
-    { color: '#f33', lineWidth: 1, yaxis: { from: 2600, to: 2999 } },
-    { color: '#f77', lineWidth: 1, yaxis: { from: 2400, to: 2599 } },
-    { color: '#ffbb55', lineWidth: 1, yaxis: { from: 2300, to: 2399 } },
-    { color: '#ffcc88', lineWidth: 1, yaxis: { from: 2100, to: 2299 } },
-    { color: '#f8f', lineWidth: 1, yaxis: { from: 1900, to: 2099 } },
-    { color: '#aaf', lineWidth: 1, yaxis: { from: 1600, to: 1899 } },
-    { color: '#77ddbb', lineWidth: 1, yaxis: { from: 1400, to: 1599 } },
-    { color: '#7f7', lineWidth: 1, yaxis: { from: 1200, to: 1399 } },
-    { color: '#ccc', lineWidth: 1, yaxis: { from: 0, to: 1199 } },
-];
 
   const options: ChartOptions<'line'> = {
     
@@ -107,14 +114,16 @@ const UserGraph: React.FC<UserGraphProps> = ({ data }) => {
             }
           },
         grid: {
-          display: false
+          display: false,
+          // color: getColor(minRating)
         },
         ticks: {
-          color: 'white',
+          color: `${theme === 'dark' ? 'white' : 'blue'}`,
           font: {
             family: 'Arial, sans-serif',
             size: 10
-          }
+          },
+          maxTicksLimit:10
         }
       },
       y: {
@@ -129,10 +138,12 @@ const UserGraph: React.FC<UserGraphProps> = ({ data }) => {
           }
         },
         grid: {
-          // color: 'orange'
+          color: 'grey',
+          tickColor: 'grey',
+          drawTicks: true,
         },
         ticks: {
-          color: 'orange',
+          color: `${theme === 'dark' ? 'white' : 'blue'}`,
           font: {
             family: 'Arial, sans-serif',
             size: 10,
@@ -140,7 +151,8 @@ const UserGraph: React.FC<UserGraphProps> = ({ data }) => {
           }
         },
         suggestedMin: minRating,
-        suggestedMax: Math.max(maxRating, 1800)
+        suggestedMax: 1800,
+        stacked: true
       }
     },
     elements: {
@@ -151,10 +163,7 @@ const UserGraph: React.FC<UserGraphProps> = ({ data }) => {
         radius: 4,
         hoverRadius: 6
       }
-    },
-    layout: {
-      padding: 20
-    },
+    }
   };
 
   return (
