@@ -6,60 +6,51 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       screens: {
         xs: "336px",
         xsm: "420px",
+        sm: "640px",
+        md: "768px",
         lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
       },
-
       colors: {
-        cblue: {
-          DEFAULT: "#0C2695",
-          50: "#4C6BF1;",
-          100: "#0C2695",
-        },
-        black: "#000",
-        heading: "#0C2695",
-        sub_heading: "#4C6BF1",
-        gray_color: "#6D6D6D",
-        footer_bg: "#3C5ADA",
-        lightText: "#0c2595d0",
-        lightText2: "#4c6af1b3",
-        timetable_color: "#FAFAFA",
-        result_name: "#551A8B",
         pall: {
-          DD : "#0F044C",
-          Dd : "#141E61",
-          dd : "#577B8D",
-          dl : "#787A91",
-          ll : "#EEEEEE"
+          DD: "#0F044C",
+          Dd: "#141E61",
+          dd: "#577B8D",
+          dl: "#787A91",
+          ll: "#EEEEEE"
         }
       },
-
-      boxShadow:{
-        box_shadow:"0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
-        club_box:"0px 0px 8px 0px rgba(0, 0, 0, 0.25)",
-        result_card:"0px 3px 8px -1px rgba(50, 50, 71, 0.05), 0px 0px 1px 0px rgba(12, 26, 75, 0.24);",
-        faculty_card:"0.1px 0.1px 3px rgba(0, 0,0,0.2);",
-        syllabus_card:"0px 3px 8px -1px rgba(50, 50, 71, 0.05), 0px 0px 1px 0px rgba(12, 26, 75, 0.24);",
-        magazine_card:"1px 1px 5px #6D6D6D;",
-        header_shadow:" 0px 5px 10px rgba(0, 0, 0, 0.4) ",
-      },
       fontSize: {
-        h1: "2rem",
-        h2: "1.5rem",
-        h3: "1.25rem",
-        text: "1rem",
+        h1: ["2rem", { lineHeight: "2.5rem", fontWeight: "700" }],
+        h2: ["1.5rem", { lineHeight: "2rem", fontWeight: "600" }],
+        h3: ["1.25rem", { lineHeight: "1.75rem", fontWeight: "600" }],
+        text: ["1rem", { lineHeight: "1.5rem" }],
       },
-
-      maxWidth: {
-        maxContent: "1260px",
-        maxContentTab: "650px",
+      animation: {
+        'gradient': 'gradient 8s linear infinite',
       },
-    }
+      keyframes: {
+        gradient: {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          },
+        },
+      },
+    },
   },
   plugins: [],
 };
+
 export default config;
